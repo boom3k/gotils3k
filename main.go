@@ -6,12 +6,12 @@ import (
 )
 
 // CSV2XLSX Returns a type xlsx.File -- Save file once completed. Thanks -> "github.com/tealeg/xlsx"
-func CSV2XLSX(indexSheetName string, dataSet [][]string) *xlsx.File {
+func CSV2XLSX(indexSheetName string, dataSet [][]string) (*xlsx.File, error) {
 	xlsxFile := xlsx.NewFile()
 	sheet, err := xlsxFile.AddSheet(indexSheetName)
 	if err != nil {
 		log.Println(err.Error())
-		panic(err)
+		return nil, err
 	}
 	for _, datum := range dataSet {
 		thisRow := sheet.AddRow()
@@ -20,11 +20,11 @@ func CSV2XLSX(indexSheetName string, dataSet [][]string) *xlsx.File {
 			cell.Value = data
 		}
 	}
-	return xlsxFile
+	return xlsxFile, nil
 }
 
 //CSV2XLSX_RAW - Handles interface slices for CSV2XLSX
-func CSV2XLSX_RAW(indexSheetName string, dataSet [][]interface{}) *xlsx.File {
+func CSV2XLSX_RAW(indexSheetName string, dataSet [][]interface{}) (*xlsx.File, error) {
 	var asStringSlice [][]string
 	for _, columnData := range dataSet {
 		var data []string
