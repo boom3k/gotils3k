@@ -5,8 +5,8 @@ import (
 	"log"
 )
 
-//Returns a type xlsx.File -- Save file once completed. Thanks -> "github.com/tealeg/xlsx"
-func csv2Xlsx(indexSheetName string, dataSet [][]interface{}) *xlsx.File {
+// CSV2XLSX Returns a type xlsx.File -- Save file once completed. Thanks -> "github.com/tealeg/xlsx"
+func CSV2XLSX(indexSheetName string, dataSet [][]interface{}) *xlsx.File {
 	xlsxFile := xlsx.NewFile()
 	sheet, err := xlsxFile.AddSheet(indexSheetName)
 	if err != nil {
